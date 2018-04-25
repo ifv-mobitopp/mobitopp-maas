@@ -1,0 +1,5 @@
+rootProject.name = 'template'
+
+if (hasProperty('pathToMobitopp') && file(pathToMobitopp).exists()) {
+  includeBuild pathToMobitopp
+}

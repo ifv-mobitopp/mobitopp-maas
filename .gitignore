@@ -1,0 +1,5 @@
+/.gradle/
+/bin/
+/results/
+*.visum_serialized
+*.serialized
