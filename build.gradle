@@ -2,10 +2,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 
 group = 'edu.kit.ifv.mobitopp'
-// When a version is set, it is included in the jar file name.
-// Start scripts are not currently created by the build script and do not include the jar file version.
-//version = '0.1'
-def mobiToppVersion = 'unspecified'
+wrapper.gradleVersion = '4.10'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -23,7 +20,7 @@ configurations.all {
 }
 
 dependencies {
-    compile "edu.kit.ifv.mobitopp:mobitopp:${mobiToppVersion}"
+    compile "edu.kit.ifv.mobitopp:mobitopp:0.1"
     
     testCompile 'junit:junit:4.12',
         'org.hamcrest:hamcrest-all:1.3',
