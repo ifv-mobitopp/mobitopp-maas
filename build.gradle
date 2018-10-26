@@ -8,7 +8,9 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
+    mavenLocal()
     mavenCentral()
+    maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local' }
     maven { url "http://mvn.collide.info/content/repositories/releases/" }
     maven { url project.ext["local.cache.path"] }
     maven { url project.ext["mobitopp.repository.url"] }
@@ -20,7 +22,7 @@ configurations.all {
 }
 
 dependencies {
-    compile "edu.kit.ifv.mobitopp:mobitopp:0.1"
+    compile "edu.kit.ifv.mobitopp:mobitopp:0.1.1+"
     
     testCompile 'junit:junit:4.12',
         'org.hamcrest:hamcrest-all:1.3',
