@@ -37,16 +37,6 @@ task syncDependencies(type: Copy) {
 
 compileJava.dependsOn syncDependencies
 
-task runPopulationSynthesis(type: JavaExec) {
-    args 'config/population-synthesis.yaml'
-    main = "edu.kit.ifv.mobitopp.populationsynthesis.PopulationSynthesisConfiguration"
-}
-
-task runSimulation(type: JavaExec) {
-    args 'config/simulation.yaml'
-    main = "edu.kit.ifv.mobitopp.simulation.SimulationConfiguration"
-}
-
 tasks.withType(JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     dependsOn check
