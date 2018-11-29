@@ -1,4 +1,4 @@
-rootProject.name = 'template'
+rootProject.name = 'mobitopp-maas'
 
 if (hasProperty('pathToMobitopp') && file(pathToMobitopp).exists()) {
   includeBuild pathToMobitopp
