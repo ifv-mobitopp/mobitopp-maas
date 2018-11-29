@@ -3,6 +3,7 @@ apply plugin: 'eclipse'
 
 group = 'edu.kit.ifv.mobitopp'
 wrapper.gradleVersion = '4.10'
+version = '0.1'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -46,4 +47,12 @@ tasks.withType(JavaExec) {
     jvmArgs '-Xss512M'
     jvmArgs '-XX:+UseG1GC'
     //jvmArgs '-Xrunhprof:cpu=samples,depth=10'
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+           repository(url: project.ext["mobitopp.repository.url"])
+        }
+    }
 }
