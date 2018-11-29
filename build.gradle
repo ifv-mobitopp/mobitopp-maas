@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'maven'
 
 group = 'edu.kit.ifv.mobitopp'
 wrapper.gradleVersion = '4.10'
