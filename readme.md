@@ -1,3 +1,3 @@
 # mobitopp-maas Repository
 
-## Für weitere Informationen: siehe [Wiki](./wiki/home)
+## Für weitere Informationen: siehe [Wiki](./wikis/home)
