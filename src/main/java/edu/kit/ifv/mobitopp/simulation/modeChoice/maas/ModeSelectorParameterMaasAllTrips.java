@@ -299,10 +299,10 @@ public class ModeSelectorParameterMaasAllTrips
 			switch (mode)
 			{
 				case RIDE_POOLING:
-					time 	= impedance.getTravelTime(source, target, mode, date, ridepoolingCar);
+					time 	= ridepoolingCar.getTravelTime(impedance, source, target, date, mode);
 					break;
 				case AUTONOMOUS_TAXI:
-					time 	= impedance.getTravelTime(source, target, mode, date, automatedtaxiCar);
+					time 	= automatedtaxiCar.getTravelTime(impedance, source, target, date, mode);
 					break;
 				default:
 					time 	= impedance.getTravelTime(source, target, mode, date);
@@ -318,10 +318,10 @@ public class ModeSelectorParameterMaasAllTrips
 					cost = person.hasCommuterTicket() ? 0.0 : impedance.getTravelCost(source, target, mode, date);
 					break;
 				case RIDE_POOLING:
-					cost = impedance.getTravelCost(source, target, mode, date, ridepoolingCar);
+					cost = ridepoolingCar.getTravelCost(impedance, source, target);
 					break;
 				case AUTONOMOUS_TAXI:
-					cost = impedance.getTravelCost(source, target, mode, date, automatedtaxiCar);
+					cost = automatedtaxiCar.getTravelCost(impedance, source, target);
 					break;					
 				default:
 					cost = impedance.getTravelCost(source, target, mode, date);

@@ -4,17 +4,11 @@ import java.util.Optional;
 
 import edu.kit.ifv.mobitopp.publictransport.connectionscan.PublicTransportRoute;
 import edu.kit.ifv.mobitopp.publictransport.model.Stop;
-import edu.kit.ifv.mobitopp.simulation.maas.MaasCar;
 import edu.kit.ifv.mobitopp.time.Time;
 
 public class ImpedanceCarSharing
 	implements ImpedanceIfc 
 {
-
-	protected final static float MAAS_DEFAULT_ACCESS_TIME_MIN = 1.00f;	
-	
-	protected final static float MAAS_DEFAULT_DETOURFACTOR = 1.2f;	
-	
 
 	protected final static float CARSHARING_COST_FREE_FLOATING_EUR_PER_MINUTE = 0.29f;
 	protected final static float CARSHARING_COST_FREE_FLOATING_EUR_PER_HOUR = 14.9f;
@@ -92,36 +86,6 @@ public class ImpedanceCarSharing
 		}
 	}
 	
-	public float getTravelTime(int source, int target, Mode mode, Time date, MaasCar car) {
-
-		if (mode == Mode.RIDE_POOLING) {
-			//TODO Shift this functionality to maas car class as travel time is dependent on the actual car
-			float time = this.impedance.getTravelTime(source, target, Mode.RIDE_POOLING, date) * MAAS_DEFAULT_DETOURFACTOR;
-		
-			float accessTime = MAAS_DEFAULT_ACCESS_TIME_MIN;
-			float waitingTime = car.getWaitingTimeToZone(source);
-					
-			time += accessTime + waitingTime;
-	
-			return time;
-			
-		} else if (mode == Mode.AUTONOMOUS_TAXI) {
-			//TODO Shift this functionality to maas car class as travel time is dependent on the actual car
-			float time = this.impedance.getTravelTime(source, target, Mode.AUTONOMOUS_TAXI, date);
-		
-			float accessTime = MAAS_DEFAULT_ACCESS_TIME_MIN;
-			float waitingTime = car.getWaitingTimeToZone(source);
-			
-			time += accessTime + waitingTime;
-			
-			return time;
-		}
-			else {
-				new RuntimeException("method call not available for this mode!");
-				return 0;
-		}
-	}
-	
 	@Override
 	public Optional<PublicTransportRoute> getPublicTransportRoute(Location source, Location target, Mode mode, Time date) {
 		return Optional.empty();
@@ -160,26 +124,6 @@ public class ImpedanceCarSharing
 		}
 	}
 	
-	public float getTravelCost(int source, int target, Mode mode, Time date, MaasCar car) { 
-
-		float cost=-1;
-		
-		if (mode == Mode.RIDE_POOLING) {
-			float distanceKm = getDistance(source, target)/1000.0f;
-			cost = ridepoolingcosts(distanceKm, car);
-			
-		} else if (mode == Mode.AUTONOMOUS_TAXI) {
-			float distanceKm = getDistance(source, target)/1000.0f;
-			cost = autonomoustaxicosts(distanceKm, car);
-
-		}	else {
-			new RuntimeException("method call not available for this mode!");
-		}
-		
-		assert cost>=0 : "no costs available";
-		return cost;
-		
-	}
 
 	private float freeFloatingCost(float time) {
 
@@ -196,22 +140,6 @@ public class ImpedanceCarSharing
 		}
 
 		return cost;
-	}
-	
-	private float ridepoolingcosts(float distanceKm, MaasCar car) {
-
-		float cost;
-
-		int numberofpassengersinclperson = 1 + car.getNumberofPassengers();
-		cost = car.owner().getCost_basefee_eur() + Math.max(car.owner().getCost_eur_per_km_minimum(),((car.owner().getCost_eur_per_km_solo()*distanceKm) / numberofpassengersinclperson));
-
-		return cost;
-	}
-	
-	private float autonomoustaxicosts(float distanceKm, MaasCar car) {
-
-		return car.owner().getCost_basefee_eur() + (car.owner().getCost_eur_per_km_solo()*distanceKm);
-		
 	}
 
 }

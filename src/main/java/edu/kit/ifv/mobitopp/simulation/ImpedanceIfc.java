@@ -6,21 +6,16 @@ import edu.kit.ifv.mobitopp.data.Zone;
 import edu.kit.ifv.mobitopp.publictransport.connectionscan.PublicTransportRoute;
 import edu.kit.ifv.mobitopp.time.Time;
 import edu.kit.ifv.mobitopp.publictransport.model.Stop;
-import edu.kit.ifv.mobitopp.simulation.maas.MaasCar;
 
 public interface ImpedanceIfc
 {
 
 
 	public float getTravelTime(int origin, int destination, Mode mode, Time date);
-	
-	public float getTravelTime(int origin, int destination, Mode mode, Time date, MaasCar car);
 
 	public Optional<PublicTransportRoute> getPublicTransportRoute(Location origin, Location destination, Mode mode, Time date);
 
 	public float getTravelCost(int origin, int destination, Mode mode, Time date);
-	
-	public float getTravelCost(int origin, int destination, Mode mode, Time date, MaasCar car);
 
 	public float getDistance(int origin, int destination);
 

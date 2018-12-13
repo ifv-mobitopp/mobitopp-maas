@@ -57,7 +57,7 @@ public class MobitoppMaaS extends Simulation {
 				new SimpleRepeatedDestinationChoice(zoneRepository().zones(),
 						new DestinationChoiceForFlexibleActivity(modeAvailabilityModel,
 								new CarRangeReachableZonesFilter(impedance()),
-								new AttractivityCalculatorCostNextPole(zoneRepository().zones(), impedance(),
+								new AttractivityCalculatorCostMaaS(zoneRepository().zones(), impedance(),
 										getDestinationChoiceFileFor("cost"), 0.5f)),
 						getDestinationChoiceFileFor("repetition")));
 	}
